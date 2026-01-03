@@ -41,8 +41,8 @@ const Portfolio = () => {
           animate={{ opacity: 1, scale: 1 }}
           className="text-center max-w-md mx-auto px-4"
         >
-          <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6">
-            <Wallet className="h-10 w-10 text-white" />
+          <div className="w-20 h-20 rounded-full bg-foreground flex items-center justify-center mx-auto mb-8">
+            <Wallet className="h-10 w-10 text-background" />
           </div>
           <h1 className="text-2xl font-bold mb-3">Connect Your Wallet</h1>
           <p className="text-muted-foreground mb-6">
@@ -55,15 +55,15 @@ const Portfolio = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen py-12">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-12"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Portfolio</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4 text-foreground">Portfolio</h1>
+          <p className="text-muted-foreground text-lg">
             Track your positions and trading performance
           </p>
         </motion.div>
@@ -202,7 +202,7 @@ const Portfolio = () => {
                   Start trading to build your portfolio
                 </p>
                 <Link to="/markets">
-                  <Button className="gradient-primary text-white">
+                  <Button className="bg-foreground text-background hover:opacity-90">
                     Explore Markets
                   </Button>
                 </Link>

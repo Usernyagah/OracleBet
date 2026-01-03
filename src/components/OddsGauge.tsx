@@ -26,13 +26,13 @@ const OddsGauge = ({ yesOdds, size = 'md', showLabels = true, className }: OddsG
           <span className="text-destructive font-medium">No {noPercentage}%</span>
         </div>
       )}
-      <div className={cn('w-full rounded-full overflow-hidden flex', sizeClasses[size])}>
+      <div className={cn('w-full rounded-full overflow-hidden flex bg-muted', sizeClasses[size])}>
         <div 
-          className="gradient-success transition-all duration-500"
+          className="bg-success transition-all duration-500"
           style={{ width: `${yesPercentage}%` }}
         />
         <div 
-          className="gradient-danger transition-all duration-500"
+          className="bg-destructive transition-all duration-500"
           style={{ width: `${noPercentage}%` }}
         />
       </div>

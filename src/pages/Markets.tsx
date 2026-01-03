@@ -86,16 +86,16 @@ const Markets = () => {
   const hasActiveFilters = searchQuery || category !== 'all' || sortBy !== 'volume';
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen py-12">
+      <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-12"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Prediction Markets</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4 text-foreground">Prediction Markets</h1>
+          <p className="text-muted-foreground text-lg">
             Browse and trade on {mockMarkets.length} active prediction markets
           </p>
         </motion.div>
@@ -105,7 +105,7 @@ const Markets = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass rounded-xl p-4 mb-8"
+          className="border border-border rounded-lg p-6 mb-12"
         >
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search */}
@@ -137,7 +137,7 @@ const Markets = () => {
                   onClick={() => setCategory(cat.value)}
                   className={cn(
                     'whitespace-nowrap',
-                    category === cat.value && 'gradient-primary text-white'
+                    category === cat.value && 'bg-foreground text-background hover:opacity-90'
                   )}
                 >
                   {cat.label}
@@ -185,7 +185,7 @@ const Markets = () => {
         </motion.div>
 
         {/* Results count */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-8">
           <p className="text-sm text-muted-foreground">
             Showing {filteredMarkets.length} market{filteredMarkets.length !== 1 && 's'}
           </p>
@@ -195,7 +195,7 @@ const Markets = () => {
         {isLoading ? (
           <MarketGridSkeleton count={6} />
         ) : filteredMarkets.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredMarkets.map((market, index) => (
               <MarketCard key={market.id} market={market} index={index} />
             ))}
@@ -204,11 +204,11 @@ const Markets = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-16"
+            className="text-center py-24"
           >
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold mb-2">No markets found</h3>
-            <p className="text-muted-foreground mb-4">
+            <div className="text-5xl mb-6">🔍</div>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">No markets found</h3>
+            <p className="text-muted-foreground mb-6">
               Try adjusting your search or filters
             </p>
             <Button onClick={clearFilters} variant="outline">

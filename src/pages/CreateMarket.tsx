@@ -75,14 +75,14 @@ const CreateMarket = () => {
   const minDate = new Date().toISOString().split('T')[0];
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <div className="min-h-screen py-12">
+      <div className="container mx-auto px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Create Market</h1>
-          <p className="text-muted-foreground mb-8">
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4 text-foreground">Create Market</h1>
+          <p className="text-muted-foreground text-lg mb-12">
             Launch a new prediction market for the community to trade
           </p>
         </motion.div>
@@ -192,7 +192,7 @@ const CreateMarket = () => {
                 {/* Submit */}
                 <Button
                   type="submit"
-                  className="w-full gradient-primary text-white"
+                  className="w-full bg-foreground text-background hover:opacity-90"
                   disabled={!isValidForm || isSubmitting || !isConnected}
                 >
                   {isSubmitting ? (
@@ -253,7 +253,7 @@ const CreateMarket = () => {
               </Card>
 
               {/* Tips */}
-              <div className="mt-6 glass rounded-xl p-4">
+              <div className="mt-6 border border-border rounded-lg p-6">
                 <h4 className="font-medium mb-3">Tips for a good market:</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">

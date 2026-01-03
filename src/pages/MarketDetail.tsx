@@ -104,8 +104,8 @@ const MarketDetail = () => {
   };
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen py-12">
+      <div className="container mx-auto px-6">
         {/* Back button */}
         <Link to="/markets" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="h-4 w-4" />
@@ -131,29 +131,29 @@ const MarketDetail = () => {
                   </div>
                 </div>
 
-                <h1 className="text-2xl md:text-3xl font-bold mb-4">{market.title}</h1>
-                <p className="text-muted-foreground mb-6">{market.description}</p>
+                <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-foreground">{market.title}</h1>
+                <p className="text-muted-foreground mb-8 text-lg leading-relaxed">{market.description}</p>
 
                 <OddsGauge yesOdds={market.yesOdds} size="lg" className="mb-6" />
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="glass rounded-lg p-3 text-center">
-                    <TrendingUp className="h-5 w-5 text-primary mx-auto mb-1" />
-                    <div className="font-semibold">{formatVolume(market.volume)}</div>
-                    <div className="text-xs text-muted-foreground">Volume</div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="border border-border rounded-lg p-4 text-center">
+                    <TrendingUp className="h-5 w-5 text-foreground mx-auto mb-2" />
+                    <div className="font-semibold text-foreground">{formatVolume(market.volume)}</div>
+                    <div className="text-xs text-muted-foreground mt-1">Volume</div>
                   </div>
-                  <div className="glass rounded-lg p-3 text-center">
-                    <Droplets className="h-5 w-5 text-primary mx-auto mb-1" />
-                    <div className="font-semibold">{formatVolume(market.liquidity)}</div>
-                    <div className="text-xs text-muted-foreground">Liquidity</div>
+                  <div className="border border-border rounded-lg p-4 text-center">
+                    <Droplets className="h-5 w-5 text-foreground mx-auto mb-2" />
+                    <div className="font-semibold text-foreground">{formatVolume(market.liquidity)}</div>
+                    <div className="text-xs text-muted-foreground mt-1">Liquidity</div>
                   </div>
-                  <div className="glass rounded-lg p-3 text-center">
+                  <div className="border border-border rounded-lg p-4 text-center">
                     <div className="font-semibold text-success">{Math.round(market.yesOdds * 100)}¢</div>
-                    <div className="text-xs text-muted-foreground">Yes Price</div>
+                    <div className="text-xs text-muted-foreground mt-1">Yes Price</div>
                   </div>
-                  <div className="glass rounded-lg p-3 text-center">
+                  <div className="border border-border rounded-lg p-4 text-center">
                     <div className="font-semibold text-destructive">{Math.round(market.noOdds * 100)}¢</div>
-                    <div className="text-xs text-muted-foreground">No Price</div>
+                    <div className="text-xs text-muted-foreground mt-1">No Price</div>
                   </div>
                 </div>
               </Card>
@@ -256,14 +256,14 @@ const MarketDetail = () => {
                       <Button
                         variant={side === 'yes' ? 'default' : 'outline'}
                         onClick={() => setSide('yes')}
-                        className={cn(side === 'yes' && 'gradient-success text-white')}
+                        className={cn(side === 'yes' && 'bg-success text-white hover:opacity-90')}
                       >
                         Buy Yes
                       </Button>
                       <Button
                         variant={side === 'no' ? 'default' : 'outline'}
                         onClick={() => setSide('no')}
-                        className={cn(side === 'no' && 'gradient-danger text-white')}
+                        className={cn(side === 'no' && 'bg-destructive text-white hover:opacity-90')}
                       >
                         Buy No
                       </Button>
@@ -288,14 +288,14 @@ const MarketDetail = () => {
                     </div>
 
                     {/* Summary */}
-                    <div className="glass rounded-lg p-4 space-y-2">
+                    <div className="border border-border rounded-lg p-4 space-y-3">
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Price per share</span>
-                        <span>{Math.round(odds * 100)}¢</span>
+                        <span className="text-foreground">{Math.round(odds * 100)}¢</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Shares received</span>
-                        <span className="font-semibold">{sharesReceived}</span>
+                        <span className="font-semibold text-foreground">{sharesReceived}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Potential payout</span>
@@ -306,7 +306,7 @@ const MarketDetail = () => {
                     </div>
 
                     <Button
-                      className={cn('w-full', side === 'yes' ? 'gradient-success' : 'gradient-danger', 'text-white')}
+                      className={cn('w-full', side === 'yes' ? 'bg-success' : 'bg-destructive', 'text-white hover:opacity-90')}
                       onClick={handleTrade}
                       disabled={!isConnected || isSubmitting || !amount}
                     >
@@ -334,8 +334,8 @@ const MarketDetail = () => {
                       />
                     </div>
 
-                    <div className="glass rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground">
+                    <div className="border border-border rounded-lg p-4">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
                         Add liquidity to earn fees from trades. You'll receive LP tokens proportional to your share.
                       </p>
                     </div>

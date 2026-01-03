@@ -3,22 +3,22 @@ import { FAUCET_URL, EXPLORER_URL } from '@/config/wagmi';
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card/50 mt-auto">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="border-t border-border mt-auto">
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-lg font-bold gradient-text mb-2">OracleBet</h3>
-            <p className="text-muted-foreground text-sm max-w-md">
+            <h3 className="text-lg font-semibold text-foreground mb-4">OracleBet</h3>
+            <p className="text-muted-foreground text-sm max-w-md leading-relaxed mb-6">
               Ultra-low fee prediction markets powered by Mantle Network. 
               Built for the Mantle Global Hackathon 2025.
             </p>
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-4">
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Twitter className="h-5 w-5" />
               </a>
@@ -26,7 +26,7 @@ const Footer = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -35,14 +35,14 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="font-semibold mb-3">Resources</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-medium mb-4 text-foreground">Resources</h4>
+            <ul className="space-y-3 text-sm">
               <li>
                 <a
                   href={FAUCET_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+                  className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
                 >
                   Testnet Faucet
                   <ExternalLink className="h-3 w-3" />
@@ -53,7 +53,7 @@ const Footer = () => {
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+                  className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
                 >
                   Block Explorer
                   <ExternalLink className="h-3 w-3" />
@@ -64,7 +64,7 @@ const Footer = () => {
                   href="https://docs.mantle.xyz"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+                  className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
                 >
                   Mantle Docs
                   <ExternalLink className="h-3 w-3" />
@@ -75,20 +75,20 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="font-semibold mb-3">Legal</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-medium mb-4 text-foreground">Legal</h4>
+            <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                   Disclaimer
                 </a>
               </li>
@@ -96,7 +96,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © 2025 OracleBet. Built on Mantle Network.
           </p>
@@ -106,7 +106,7 @@ const Footer = () => {
               href="https://mantle.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary font-semibold hover:underline"
+              className="text-foreground font-medium hover:opacity-70 transition-opacity"
             >
               Mantle
             </a>

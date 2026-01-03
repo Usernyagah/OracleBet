@@ -18,28 +18,28 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 glass-strong">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <nav className="sticky top-0 z-50 bg-background border-b border-border">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-              <TrendingUp className="h-5 w-5 text-white" />
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded flex items-center justify-center bg-foreground">
+              <TrendingUp className="h-5 w-5 text-background" />
             </div>
-            <span className="text-xl font-bold gradient-text">OracleBet</span>
+            <span className="text-xl font-semibold text-foreground">OracleBet</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  'flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200',
+                  'flex items-center gap-2 px-4 py-2 text-sm transition-colors',
                   location.pathname === link.path
-                    ? 'bg-primary/10 text-primary font-medium'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                    ? 'text-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 <link.icon className="h-4 w-4" />
@@ -75,26 +75,26 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border bg-card"
+            className="md:hidden border-t border-border bg-background"
           >
-            <div className="container mx-auto px-4 py-4 space-y-3">
+            <div className="container mx-auto px-6 py-6 space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    'flex items-center gap-3 px-4 py-3 rounded-lg transition-all',
+                    'flex items-center gap-3 px-4 py-3 text-sm transition-colors',
                     location.pathname === link.path
-                      ? 'bg-primary/10 text-primary font-medium'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'text-foreground font-medium'
+                      : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
-                  <link.icon className="h-5 w-5" />
+                  <link.icon className="h-4 w-4" />
                   <span>{link.label}</span>
                 </Link>
               ))}
-              <div className="pt-3 border-t border-border">
+              <div className="pt-4 border-t border-border">
                 <ConnectButton />
               </div>
             </div>

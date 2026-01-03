@@ -18,40 +18,39 @@ const MarketCard = ({ market, index = 0, featured = false }: MarketCardProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
     >
       <Link to={`/market/${market.id}`}>
         <Card className={cn(
-          'p-5 card-hover cursor-pointer group bg-card border-border',
-          featured && 'glow'
+          'p-6 card-hover cursor-pointer group bg-card border-border'
         )}>
           {/* Header */}
-          <div className="flex items-start justify-between gap-3 mb-4">
-            <Badge className={cn('shrink-0', getCategoryColor(market.category))}>
+          <div className="flex items-start justify-between gap-3 mb-6">
+            <Badge variant="outline" className="shrink-0 text-xs">
               {getCategoryLabel(market.category)}
             </Badge>
-            <div className="flex items-center gap-1 text-muted-foreground text-sm">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs">
               <Clock className="h-3.5 w-3.5" />
               <span>{formatTimeRemaining(market.endDate)}</span>
             </div>
           </div>
 
           {/* Title */}
-          <h3 className="font-semibold text-lg mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+          <h3 className="font-medium text-base mb-6 line-clamp-2 group-hover:opacity-70 transition-opacity text-foreground leading-relaxed">
             {market.title}
           </h3>
 
           {/* Odds */}
-          <OddsGauge yesOdds={market.yesOdds} className="mb-4" />
+          <OddsGauge yesOdds={market.yesOdds} className="mb-6" />
 
           {/* Stats */}
-          <div className="flex items-center justify-between text-sm text-muted-foreground pt-3 border-t border-border">
-            <div className="flex items-center gap-1">
-              <TrendingUp className="h-4 w-4" />
+          <div className="flex items-center justify-between text-xs text-muted-foreground pt-6 border-t border-border">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-3.5 w-3.5" />
               <span>{formatVolume(market.volume)}</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Droplets className="h-4 w-4" />
+            <div className="flex items-center gap-2">
+              <Droplets className="h-3.5 w-3.5" />
               <span>{formatVolume(market.liquidity)}</span>
             </div>
           </div>
