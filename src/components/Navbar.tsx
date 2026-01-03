@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Menu, X, TrendingUp, Plus, Wallet, Home } from 'lucide-react';
+import { Menu, X, TrendingUp, Plus, Wallet, Home, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 const navLinks = [
   { path: '/', label: 'Home', icon: Home },
@@ -16,6 +17,16 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-border">
@@ -48,8 +59,21 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Wallet Connect */}
-          <div className="hidden md:block">
+          {/* Theme Toggle & Wallet Connect */}
+          <div className="hidden md:flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="h-10 w-10"
+              aria-label="Toggle theme"
+            >
+              {mounted && theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </Button>
             <ConnectButton 
               showBalance={{ smallScreen: false, largeScreen: true }}
               chainStatus={{ smallScreen: 'icon', largeScreen: 'full' }}
@@ -94,7 +118,24 @@ const Navbar = () => {
                   <span>{link.label}</span>
                 </Link>
               ))}
-              <div className="pt-4 border-t border-border">
+              <div className="pt-4 border-t border-border space-y-4">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  onClick={toggleTheme}
+                >
+                  {mounted && theme === 'dark' ? (
+                    <>
+                      <Sun className="h-4 w-4 mr-2" />
+                      Light Mode
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="h-4 w-4 mr-2" />
+                      Dark Mode
+                    </>
+                  )}
+                </Button>
                 <ConnectButton />
               </div>
             </div>
