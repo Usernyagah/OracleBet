@@ -28,6 +28,7 @@ OracleBet leverages the power of decentralized oracles and Mantle's efficient L2
 - Node.js (v18 or higher) - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 - npm or yarn package manager
 - A Web3 wallet (MetaMask, WalletConnect, etc.)
+- Docker (optional, for containerized deployment)
 
 ### Installation
 
@@ -38,12 +39,22 @@ cd OracleBet
 ```
 
 2. Install dependencies:
+
+**For Contracts:**
 ```bash
+cd contracts
 npm install
 ```
 
-3. Start the development server:
+**For Client:**
 ```bash
+cd ../client
+npm install
+```
+
+3. Start the development server (from `client/` directory):
+```bash
+cd client
 npm run dev
 ```
 
@@ -51,11 +62,19 @@ npm run dev
 
 ### Building for Production
 
+**Client:**
 ```bash
+cd client
 npm run build
 ```
 
-The production build will be in the `dist` directory.
+The production build will be in the `client/dist` directory.
+
+**Contracts:**
+```bash
+cd contracts
+npm run compile
+```
 
 ## 🛠️ Tech Stack
 
@@ -71,13 +90,26 @@ The production build will be in the `dist` directory.
 ## 📁 Project Structure
 
 ```
-src/
-├── components/     # Reusable UI components
-├── pages/          # Page components
-├── config/         # Configuration files (wagmi, etc.)
-├── data/           # Mock data and constants
-├── lib/            # Utility functions
-└── hooks/          # Custom React hooks
+oraclebet-hub/
+├── client/              # Frontend React application
+│   ├── src/
+│   │   ├── components/  # Reusable UI components
+│   │   ├── pages/       # Page components
+│   │   ├── config/      # Configuration files (wagmi, etc.)
+│   │   ├── data/        # Mock data and constants
+│   │   ├── lib/         # Utility functions
+│   │   └── hooks/       # Custom React hooks
+│   ├── public/          # Static assets
+│   └── package.json     # Client dependencies
+│
+└── contracts/           # Smart contracts (Hardhat)
+    ├── contracts/       # Solidity contracts
+    │   ├── Factory.sol
+    │   └── Market.sol
+    ├── scripts/         # Deployment scripts
+    ├── test/            # Contract tests
+    ├── hardhat.config.cjs
+    └── package.json     # Contract dependencies
 ```
 
 ## 🔗 Links
@@ -106,11 +138,198 @@ Monitor all your active positions, past trades, and total portfolio value in one
 
 ## 🚢 Deployment
 
+### Smart Contracts (Hardhat)
+
+1. **Get Testnet MNT from Faucet**:
+   - Visit [Mantle Sepolia Faucet](https://faucet.sepolia.mantle.xyz/) to get test MNT
+   - Or use alternative faucets: [Alchemy](https://www.alchemy.com/faucets/mantle-sepolia) or [QuickNode](https://faucet.quicknode.com/mantle/sepolia)
+
+2. **Set up Environment Variables**:
+   ```bash
+   export PRIVATE_KEY=your_private_key_here
+   ```
+
+3. **Deploy Contracts** (from `contracts/` directory):
+   ```bash
+   cd contracts
+   npx hardhat run scripts/deploy_all.ts --network mantle_testnet
+   ```
+
+   The script will:
+   - Deploy the Factory contract
+   - Create 3 sample markets
+   - Output contract addresses and explorer links
+   - Export frontend configuration to `.env.local`
+
+4. **Verify Contracts** (optional):
+   ```bash
+   npx hardhat verify --network mantle_testnet <CONTRACT_ADDRESS>
+   ```
+
+### Frontend Deployment
+
 You can deploy this project using any static hosting service:
 
 - **Vercel**: Connect your GitHub repository and deploy automatically
 - **Netlify**: Drag and drop the `dist` folder or connect via Git
 - **GitHub Pages**: Use GitHub Actions to build and deploy
+- **Docker**: See Docker Deployment section below
+
+Remember to set environment variables in your hosting platform with the contract addresses from deployment.
+
+### Docker Deployment
+
+#### Build and Run Client
+
+**Build the Docker image:**
+```bash
+cd client
+docker build -t oraclebet-client .
+```
+
+**Run the container:**
+```bash
+docker run -d -p 3000:80 --name oraclebet-client oraclebet-client
+```
+
+**Or use Docker Compose (from root):**
+```bash
+# Build and run client
+docker-compose up -d client
+
+# Build and run with Hardhat node (development)
+docker-compose --profile dev up -d
+
+# View logs
+docker-compose logs -f client
+
+# Stop services
+docker-compose down
+```
+
+#### Docker Compose Services
+
+- **client**: Frontend React application (port 3000)
+- **hardhat-node**: Local Hardhat node for testing (port 8545, dev profile only)
+
+#### Using Makefile (Optional)
+
+For convenience, you can use the provided Makefile:
+
+```bash
+# Build client image
+make build-client
+
+# Build all images
+make build
+
+# Start all services
+make up
+
+# Start with Hardhat node (dev)
+make up-dev
+
+# View logs
+make logs
+
+# Stop services
+make down
+
+# Clean up
+make clean
+```
+
+#### Environment Variables
+
+For production, you can pass environment variables to the client container:
+```bash
+docker run -d -p 3000:80 \
+  -e VITE_FACTORY_ADDRESS=0x... \
+  -e VITE_CHAIN_ID=5003 \
+  --name oraclebet-client \
+  oraclebet-client
+```
+
+Or use a `.env` file with docker-compose:
+```yaml
+# docker-compose.override.yml
+services:
+  client:
+    environment:
+      - VITE_FACTORY_ADDRESS=0x...
+      - VITE_CHAIN_ID=5003
+```
+
+### Docker Deployment
+
+#### Build and Run Client
+
+**Build the Docker image:**
+```bash
+cd client
+docker build -t oraclebet-client .
+```
+
+**Run the container:**
+```bash
+docker run -d -p 3000:80 --name oraclebet-client oraclebet-client
+```
+
+**Or use Docker Compose (from root):**
+```bash
+# Build and run client
+docker-compose up -d client
+
+# Build and run with Hardhat node (development)
+docker-compose --profile dev up -d
+
+# View logs
+docker-compose logs -f client
+
+# Stop services
+docker-compose down
+```
+
+#### Docker Compose Services
+
+- **client**: Frontend React application (port 3000)
+- **hardhat-node**: Local Hardhat node for testing (port 8545, dev profile only)
+
+#### Environment Variables
+
+For production, you can pass environment variables to the client container:
+```bash
+docker run -d -p 3000:80 \
+  -e VITE_FACTORY_ADDRESS=0x... \
+  -e VITE_CHAIN_ID=5003 \
+  --name oraclebet-client \
+  oraclebet-client
+```
+
+Or use a `.env` file with docker-compose:
+```yaml
+# docker-compose.override.yml
+services:
+  client:
+    environment:
+      - VITE_FACTORY_ADDRESS=0x...
+      - VITE_CHAIN_ID=5003
+```
+
+## 🏆 Hackathon Notes
+
+**OracleBet leverages Mantle's ultra-low fees for high-volume micro-bets on crypto/RWA events**
+
+- **Low Fees**: Mantle's efficient L2 infrastructure enables micro-transactions with minimal gas costs
+- **High Throughput**: Perfect for high-frequency trading and small bets
+- **Real-World Assets**: Ideal for RWA yield predictions with cost-effective oracle queries
+- **Scalability**: Handle thousands of concurrent bets without breaking the bank
+
+Key advantages:
+- **0.3% trading fees** - One of the lowest in the industry
+- **Instant finality** - Fast resolution for time-sensitive markets
+- **Oracle Integration Ready** - Chainlink price feeds and UMA optimistic oracle placeholders
+- **Gas Optimized** - Contract code optimized for Mantle's cost-effective environment
 
 ## 🤝 Contributing
 

@@ -1,0 +1,19 @@
+{
+  "name": "oraclebet-contracts",
+  "version": "1.0.0",
+  "description": "OracleBet Smart Contracts",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy_all.ts --network mantle_testnet",
+    "deploy:local": "hardhat run scripts/deploy_all.ts --network hardhat",
+    "node": "hardhat node",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@openzeppelin/contracts": "^5.4.0",
+    "hardhat": "^2.28.0"
+  }
+}
+

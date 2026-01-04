@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Frontend Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: oraclebet-client
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - oraclebet-network
+
+  # Hardhat Node (for local development/testing)
+  hardhat-node:
+    build:
+      context: ./contracts
+      dockerfile: Dockerfile
+    container_name: oraclebet-hardhat-node
+    ports:
+      - "8545:8545"
+    environment:
+      - NODE_ENV=development
+    command: npx hardhat node --hostname 0.0.0.0
+    networks:
+      - oraclebet-network
+    profiles:
+      - dev
+
+networks:
+  oraclebet-network:
+    driver: bridge
+
