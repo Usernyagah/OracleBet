@@ -29,9 +29,12 @@ const Index = () => {
             transition={{ duration: 0.4 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 leading-tight text-foreground">
-              OracleBet: Ultra-Low Fee Predictions on Mantle
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold mb-4 leading-tight text-foreground">
+              OracleBet
             </h1>
+            <p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-8 text-muted-foreground">
+              Ultra-Low Fee Predictions on Mantle
+            </p>
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
               Bet on crypto prices, RWA yields & ecosystem events with the power of 
               decentralized oracles and Mantle's lightning-fast L2.
