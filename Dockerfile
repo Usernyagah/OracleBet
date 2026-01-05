@@ -20,6 +20,8 @@ WORKDIR /app/contracts
 RUN npm run compile
 
 # Copy client source code
+# Return to app root first
+WORKDIR /app
 COPY client/ ./client/
 
 # Build the client application
