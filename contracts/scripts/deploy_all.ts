@@ -6,73 +6,108 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   const explorerBaseUrl = "https://explorer.sepolia.mantle.xyz/address";
 
-  console.log("Deploying contracts with the account:", deployer.address);
-  console.log("Account balance:", (await ethers.provider.getBalance(deployer.address)).toString());
+  console.log("Deploying OracleBet contracts with the account:", deployer.address);
+  console.log("Account balance:", ethers.formatEther(await ethers.provider.getBalance(deployer.address)), "MNT");
 
-  // Deploy Factory
-  console.log("\n=== Deploying Factory ===");
-  const Factory = await ethers.getContractFactory("Factory");
-  const factory = await Factory.deploy();
+  // Deploy PredictionFactory
+  console.log("\n=== Deploying PredictionFactory ===");
+  const PredictionFactory = await ethers.getContractFactory("PredictionFactory");
+  const factory = await PredictionFactory.deploy();
   await factory.waitForDeployment();
   const factoryAddress = await factory.getAddress();
 
-  console.log("Factory deployed to:", factoryAddress);
+  console.log("PredictionFactory deployed to:", factoryAddress);
   console.log(`Factory Explorer: ${explorerBaseUrl}/${factoryAddress}`);
 
   // Create sample markets
   console.log("\n=== Creating Sample Markets ===");
 
-  // Market 1: Will BTC reach $100k by end of 2024?
-  const question1 = "Will BTC reach $100,000 by December 31, 2024?";
-  const resolutionTime1 = Math.floor(Date.now() / 1000) + 365 * 24 * 60 * 60; // 1 year from now
-  const oracle1 = deployer.address; // Placeholder oracle
+  // Market 1: MNT > $2 by Q1 2026?
+  const title1 = "MNT > $2 by Q1 2026?";
+  const description1 = "Will Mantle Network token (MNT) reach $2 USD by Q1 2026?";
+  const resolutionTime1 = Math.floor(Date.now() / 1000) + 90 * 24 * 60 * 60; // 90 days from now
 
-  console.log("\nCreating Market 1:", question1);
-  const tx1 = await factory.createMarket(question1, resolutionTime1, oracle1);
+  console.log("\nCreating Market 1:", title1);
+  const tx1 = await factory.createMarket(title1, description1, resolutionTime1);
   const receipt1 = await tx1.wait();
   const marketCreatedEvent1 = receipt1?.logs.find(
-    (log: any) => log.fragment?.name === "MarketCreated"
+    (log: any) => {
+      try {
+        const parsed = factory.interface.parseLog(log);
+        return parsed?.name === "MarketCreated";
+      } catch {
+        return false;
+      }
+    }
   );
-  const marketAddress1 = marketCreatedEvent1?.args?.market || "Not found";
+  let marketAddress1 = "Not found";
+  if (marketCreatedEvent1) {
+    const parsed = factory.interface.parseLog(marketCreatedEvent1);
+    marketAddress1 = parsed?.args[0] || "Not found";
+  }
   console.log("Market 1 deployed to:", marketAddress1);
   console.log(`Market 1 Explorer: ${explorerBaseUrl}/${marketAddress1}`);
 
-  // Market 2: Will ETH hit $5k in 2024?
-  const question2 = "Will ETH reach $5,000 in 2024?";
-  const resolutionTime2 = Math.floor(Date.now() / 1000) + 300 * 24 * 60 * 60; // ~10 months from now
-  const oracle2 = deployer.address;
+  // Market 2: Bitcoin hits $150k in 2026?
+  const title2 = "Bitcoin hits $150k in 2026?";
+  const description2 = "Will Bitcoin (BTC) reach $150,000 USD in 2026?";
+  const resolutionTime2 = Math.floor(Date.now() / 1000) + 365 * 24 * 60 * 60; // 1 year from now
 
-  console.log("\nCreating Market 2:", question2);
-  const tx2 = await factory.createMarket(question2, resolutionTime2, oracle2);
+  console.log("\nCreating Market 2:", title2);
+  const tx2 = await factory.createMarket(title2, description2, resolutionTime2);
   const receipt2 = await tx2.wait();
   const marketCreatedEvent2 = receipt2?.logs.find(
-    (log: any) => log.fragment?.name === "MarketCreated"
+    (log: any) => {
+      try {
+        const parsed = factory.interface.parseLog(log);
+        return parsed?.name === "MarketCreated";
+      } catch {
+        return false;
+      }
+    }
   );
-  const marketAddress2 = marketCreatedEvent2?.args?.market || "Not found";
+  let marketAddress2 = "Not found";
+  if (marketCreatedEvent2) {
+    const parsed = factory.interface.parseLog(marketCreatedEvent2);
+    marketAddress2 = parsed?.args[0] || "Not found";
+  }
   console.log("Market 2 deployed to:", marketAddress2);
   console.log(`Market 2 Explorer: ${explorerBaseUrl}/${marketAddress2}`);
 
-  // Market 3: Will Mantle TVL exceed $1B?
-  const question3 = "Will Mantle Network TVL exceed $1 billion by Q2 2024?";
+  // Market 3: Mantle TVL > $1B?
+  const title3 = "Mantle TVL > $1B?";
+  const description3 = "Will Mantle Network Total Value Locked (TVL) exceed $1 billion by Q2 2026?";
   const resolutionTime3 = Math.floor(Date.now() / 1000) + 180 * 24 * 60 * 60; // 6 months from now
-  const oracle3 = deployer.address;
 
-  console.log("\nCreating Market 3:", question3);
-  const tx3 = await factory.createMarket(question3, resolutionTime3, oracle3);
+  console.log("\nCreating Market 3:", title3);
+  const tx3 = await factory.createMarket(title3, description3, resolutionTime3);
   const receipt3 = await tx3.wait();
   const marketCreatedEvent3 = receipt3?.logs.find(
-    (log: any) => log.fragment?.name === "MarketCreated"
+    (log: any) => {
+      try {
+        const parsed = factory.interface.parseLog(log);
+        return parsed?.name === "MarketCreated";
+      } catch {
+        return false;
+      }
+    }
   );
-  const marketAddress3 = marketCreatedEvent3?.args?.market || "Not found";
+  let marketAddress3 = "Not found";
+  if (marketCreatedEvent3) {
+    const parsed = factory.interface.parseLog(marketCreatedEvent3);
+    marketAddress3 = parsed?.args[0] || "Not found";
+  }
   console.log("Market 3 deployed to:", marketAddress3);
   console.log(`Market 3 Explorer: ${explorerBaseUrl}/${marketAddress3}`);
 
+  // Get all markets
+  const allMarkets = await factory.getAllMarkets();
+
   // Summary
   console.log("\n=== Deployment Summary ===");
-  console.log("Factory Address:", factoryAddress);
-  console.log("Market Count:", (await factory.getMarketCount()).toString());
-  console.log("\nAll Markets:");
-  const allMarkets = await factory.getAllMarkets();
+  console.log("PredictionFactory Address:", factoryAddress);
+  console.log("Total Markets Created:", allMarkets.length.toString());
+  console.log("\nAll Market Addresses:");
   allMarkets.forEach((market: string, index: number) => {
     console.log(`  Market ${index + 1}: ${market}`);
   });
@@ -90,27 +125,26 @@ async function main() {
   // Output JSON
   console.log(JSON.stringify(deploymentData, null, 2));
 
-  // Write .env.local file for frontend
+  // Write frontend.env file
   const envContent = `# OracleBet Contract Addresses - Mantle Sepolia Testnet
 # Generated: ${new Date().toISOString()}
 
-VITE_FACTORY_ADDRESS=${factoryAddress}
-VITE_CHAIN_ID=5003
-VITE_NETWORK_NAME=mantle_testnet
-VITE_EXPLORER_URL=https://explorer.sepolia.mantle.xyz
-VITE_RPC_URL=https://rpc.sepolia.mantle.xyz
+FACTORY_ADDRESS=${factoryAddress}
+CHAIN_ID=5003
+NETWORK_NAME=mantle_testnet
+EXPLORER_URL=https://explorer.sepolia.mantle.xyz
+RPC_URL=https://rpc.sepolia.mantle.xyz
 
 # Market Addresses (comma-separated)
-VITE_MARKET_ADDRESSES=${allMarkets.join(",")}
+MARKET_ADDRESSES=${allMarkets.join(",")}
 
 # Market Count
-VITE_MARKET_COUNT=${allMarkets.length}
+MARKET_COUNT=${allMarkets.length}
 `;
 
-  const envPath = path.join(__dirname, "..", ".env.local");
+  const envPath = path.join(__dirname, "..", "frontend.env");
   fs.writeFileSync(envPath, envContent);
-  console.log(`\n✓ Frontend .env.local file created at: ${envPath}`);
-  console.log("\n⚠️  Remember to add .env.local to .gitignore if not already present!");
+  console.log(`\n✓ Frontend env file created at: ${envPath}`);
 }
 
 main()
@@ -119,4 +153,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-
