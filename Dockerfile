@@ -1,4 +1,4 @@
-# Multi-stage build for OracleBet Client
+# Multi-stage build for OracleBet - Full Project (Contracts + Client)
 FROM node:20-alpine AS builder
 
 # Set working directory
@@ -7,14 +7,22 @@ WORKDIR /app
 # Copy package files for workspace setup
 COPY package*.json ./
 COPY client/package*.json ./client/
+COPY contracts/package*.json ./contracts/
 
-# Install dependencies (handles workspace)
+# Install all dependencies (handles workspace)
 RUN npm install
+
+# Copy contracts source code
+COPY contracts/ ./contracts/
+
+# Compile contracts (generates ABIs and artifacts)
+WORKDIR /app/contracts
+RUN npm run compile
 
 # Copy client source code
 COPY client/ ./client/
 
-# Build the application
+# Build the client application
 WORKDIR /app/client
 RUN npm run build
 
