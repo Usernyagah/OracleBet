@@ -114,6 +114,7 @@ oraclebet-hub/
 
 ## 🔗 Links
 
+- **Live Demo**: [OracleBet](https://oraclebet-1.onrender.com/)
 - **Network**: Mantle Sepolia Testnet
 - **Explorer**: [Mantle Sepolia Explorer](https://explorer.sepolia.mantle.xyz)
 - **Repository**: [GitHub](https://github.com/Usernyagah/OracleBet)
@@ -341,7 +342,7 @@ This project is open source and available under the MIT License.
 
 ## 👤 Author
 
-**Usernyagah**
+**Dennis Nyagah**
 
 Built for the Mantle Global Hackathon 2025.
 
