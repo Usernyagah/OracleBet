@@ -46,8 +46,8 @@ contract ShareToken is ERC20 {
 contract PredictionMarket is ReentrancyGuard, Ownable {
     // Immutable variables
     address public immutable factory;
-    string public immutable title;
-    string public immutable description;
+    string public title;
+    string public description;
     uint256 public immutable resolutionTimestamp;
 
     // Share tokens
