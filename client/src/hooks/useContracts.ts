@@ -1,6 +1,7 @@
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { FACTORY_ADDRESS, FACTORY_ABI, MARKET_ABI } from '@/config/contracts';
 import { Address } from 'viem';
+import { toast } from 'sonner';
 
 /**
  * Hook to interact with the PredictionFactory contract
@@ -12,12 +13,20 @@ export function useFactory() {
   });
 
   const createMarket = async (title: string, description: string, resolutionTimestamp: bigint) => {
-    return writeContract({
-      address: FACTORY_ADDRESS as Address,
-      abi: FACTORY_ABI,
-      functionName: 'createMarket',
-      args: [title, description, resolutionTimestamp],
-    });
+    try {
+      return await writeContract({
+        address: FACTORY_ADDRESS as Address,
+        abi: FACTORY_ABI,
+        functionName: 'createMarket',
+        args: [title, description, resolutionTimestamp],
+      });
+    } catch (err) {
+      const error = err as Error;
+      toast.error('Failed to create market', {
+        description: error.message || 'An unexpected error occurred',
+      });
+      throw err;
+    }
   };
 
   return {
@@ -87,40 +96,72 @@ export function useMarket(marketAddress: Address) {
     functionName: 'outcome',
   });
 
-  // Write functions
+  // Write functions with error handling
   const buyYes = async (amount: bigint) => {
-    return writeContract({
-      address: marketAddress,
-      abi: MARKET_ABI,
-      functionName: 'buyYes',
-      value: amount,
-    });
+    try {
+      return await writeContract({
+        address: marketAddress,
+        abi: MARKET_ABI,
+        functionName: 'buyYes',
+        value: amount,
+      });
+    } catch (err) {
+      const error = err as Error;
+      toast.error('Failed to buy YES shares', {
+        description: error.message || 'Transaction failed',
+      });
+      throw err;
+    }
   };
 
   const buyNo = async (amount: bigint) => {
-    return writeContract({
-      address: marketAddress,
-      abi: MARKET_ABI,
-      functionName: 'buyNo',
-      value: amount,
-    });
+    try {
+      return await writeContract({
+        address: marketAddress,
+        abi: MARKET_ABI,
+        functionName: 'buyNo',
+        value: amount,
+      });
+    } catch (err) {
+      const error = err as Error;
+      toast.error('Failed to buy NO shares', {
+        description: error.message || 'Transaction failed',
+      });
+      throw err;
+    }
   };
 
   const addLiquidity = async (amount: bigint) => {
-    return writeContract({
-      address: marketAddress,
-      abi: MARKET_ABI,
-      functionName: 'addLiquidity',
-      value: amount,
-    });
+    try {
+      return await writeContract({
+        address: marketAddress,
+        abi: MARKET_ABI,
+        functionName: 'addLiquidity',
+        value: amount,
+      });
+    } catch (err) {
+      const error = err as Error;
+      toast.error('Failed to add liquidity', {
+        description: error.message || 'Transaction failed',
+      });
+      throw err;
+    }
   };
 
   const redeem = async () => {
-    return writeContract({
-      address: marketAddress,
-      abi: MARKET_ABI,
-      functionName: 'redeem',
-    });
+    try {
+      return await writeContract({
+        address: marketAddress,
+        abi: MARKET_ABI,
+        functionName: 'redeem',
+      });
+    } catch (err) {
+      const error = err as Error;
+      toast.error('Failed to redeem shares', {
+        description: error.message || 'Transaction failed',
+      });
+      throw err;
+    }
   };
 
   return {

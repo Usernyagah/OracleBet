@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production=false
+# Install dependencies (production=false ensures devDependencies are installed for build)
+RUN npm ci --only=production=false --prefer-offline --no-audit
 
 # Copy source code
 COPY . .
@@ -28,7 +28,16 @@ ENV VITE_RPC_URL=${VITE_RPC_URL}
 ENV VITE_EXPLORER_URL=${VITE_EXPLORER_URL}
 
 # Build the application
+# Validate that build args are provided
+RUN if [ -z "$VITE_FACTORY_ADDRESS" ]; then \
+      echo "Error: VITE_FACTORY_ADDRESS build arg is required" && exit 1; \
+    fi
 RUN npm run build
+
+# Verify build output exists
+RUN if [ ! -d "dist" ] || [ -z "$(ls -A dist)" ]; then \
+      echo "Error: Build failed - dist directory is empty" && exit 1; \
+    fi
 
 # Production stage
 FROM nginx:alpine
