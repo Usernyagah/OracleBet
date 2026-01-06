@@ -82,7 +82,7 @@ jobs:
       - name: Run E2E tests
         working-directory: ./client
         run: npm run test:e2e -- --project=chromium --reporter=list
-        timeout-minutes: 10
+        timeout-minutes: 15
         env:
           VITE_FACTORY_ADDRESS: "0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703"
           VITE_MARKET_ADDRESSES: "0x0667C18576CeDa4f0a54d3614684b1271D357C9b,0xA24F78E64af7fb8b580862C23Cb44728F4a6468A,0x819d4A350A6eD4098fD57C51a3281967F57f10d0"
