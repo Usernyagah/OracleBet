@@ -119,6 +119,30 @@ oraclebet-hub/
 - **Explorer**: [Mantle Sepolia Explorer](https://explorer.sepolia.mantle.xyz)
 - **Repository**: [GitHub](https://github.com/Usernyagah/OracleBet)
 
+## 📋 Deployed Contracts (Mantle Sepolia Testnet)
+
+### Main Contracts
+
+- **PredictionFactory**: [`0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703`](https://explorer.sepolia.mantle.xyz/address/0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703)
+  - Factory contract for creating and managing prediction markets
+
+### Active Markets
+
+1. **MNT > $2 by Q1 2026?**: [`0x0667C18576CeDa4f0a54d3614684b1271D357C9b`](https://explorer.sepolia.mantle.xyz/address/0x0667C18576CeDa4f0a54d3614684b1271D357C9b)
+   - Will Mantle Network token (MNT) reach $2 USD by Q1 2026?
+
+2. **Bitcoin hits $150k in 2026?**: [`0xA24F78E64af7fb8b580862C23Cb44728F4a6468A`](https://explorer.sepolia.mantle.xyz/address/0xA24F78E64af7fb8b580862C23Cb44728F4a6468A)
+   - Will Bitcoin (BTC) reach $150,000 USD in 2026?
+
+3. **Mantle TVL > $1B?**: [`0x819d4A350A6eD4098fD57C51a3281967F57f10d0`](https://explorer.sepolia.mantle.xyz/address/0x819d4A350A6eD4098fD57C51a3281967F57f10d0)
+   - Will Mantle Network Total Value Locked (TVL) exceed $1 billion by Q2 2026?
+
+### Network Configuration
+
+- **Chain ID**: 5003
+- **RPC URL**: `https://rpc.sepolia.mantle.xyz`
+- **Explorer**: `https://explorer.sepolia.mantle.xyz`
+
 ## 📝 How It Works
 
 1. **Connect Wallet**: Link your Web3 wallet to get started
@@ -153,14 +177,26 @@ Monitor all your active positions, past trades, and total portfolio value in one
 3. **Deploy Contracts** (from `contracts/` directory):
    ```bash
    cd contracts
-   npx hardhat run scripts/deploy_all.ts --network mantle_testnet
+   npm run deploy
    ```
 
    The script will:
    - Deploy the Factory contract
    - Create 3 sample markets
    - Output contract addresses and explorer links
-   - Export frontend configuration to `.env.local`
+   - Export frontend configuration to `frontend.env`
+
+4. **Connect Frontend to Contracts**:
+   The frontend is already configured with the deployed contract addresses. The configuration files are:
+   - `client/src/config/contracts.ts` - Contract addresses and ABIs
+   - `client/.env` - Environment variables (already set with deployed addresses)
+   - `client/src/hooks/useContracts.ts` - React hooks for contract interactions
+   
+   To use the contracts in your components:
+   ```typescript
+   import { useFactory, useMarket, useAllMarkets } from '@/hooks/useContracts';
+   import { FACTORY_ADDRESS, MARKET_ADDRESSES } from '@/config/contracts';
+   ```
 
 4. **Verify Contracts** (optional):
    ```bash
