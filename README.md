@@ -8,6 +8,18 @@ OracleBet is a decentralized prediction market platform built on Mantle Network,
 
 OracleBet leverages the power of decentralized oracles and Mantle's efficient L2 infrastructure to provide a seamless prediction market experience. Users can create markets, place bets, and redeem winnings with minimal fees and maximum transparency.
 
+## 📊 Pitch Deck
+
+For detailed information about OracleBet Hub's problem statement, solution, business model, roadmap, team, and compliance declarations, please refer to our pitch deck:
+
+- **HTML Version**: [`pitch-deck.html`](./pitch-deck.html) - Interactive web version
+- **PDF Version**: [`OracleBet Hub - Pitch Deck.pdf`](./OracleBet%20Hub%20-%20Pitch%20Deck.pdf) - Downloadable PDF
+
+The pitch deck includes:
+- One-pager pitch (Problem, Solution, Business Model, Roadmap)
+- Team bios and contact information
+- Compliance declaration and regulatory disclosures
+
 ## ✨ Features
 
 - **Ultra-Low Fees**: Only 0.1% trading fees
@@ -94,27 +106,48 @@ oraclebet-hub/
 ├── client/              # Frontend React application
 │   ├── src/
 │   │   ├── components/  # Reusable UI components
+│   │   │   └── ui/      # shadcn-ui components
 │   │   ├── pages/       # Page components
-│   │   ├── config/      # Configuration files (wagmi, etc.)
+│   │   ├── config/      # Configuration files (wagmi, contracts, etc.)
 │   │   ├── data/        # Mock data and constants
 │   │   ├── lib/         # Utility functions
-│   │   └── hooks/       # Custom React hooks
+│   │   ├── hooks/       # Custom React hooks
+│   │   └── abis/        # Contract ABIs
 │   ├── public/          # Static assets
+│   ├── e2e/             # End-to-end tests (Playwright)
+│   ├── dist/            # Production build output
+│   ├── Dockerfile       # Docker configuration for client
 │   └── package.json     # Client dependencies
 │
-└── contracts/           # Smart contracts (Hardhat)
-    ├── contracts/       # Solidity contracts
-    │   ├── Factory.sol
-    │   └── Market.sol
-    ├── scripts/         # Deployment scripts
-    ├── test/            # Contract tests
-    ├── hardhat.config.cjs
-    └── package.json     # Contract dependencies
+├── contracts/           # Smart contracts (Hardhat)
+│   ├── contracts/       # Solidity contracts
+│   │   ├── Factory.sol
+│   │   ├── Market.sol
+│   │   ├── PredictionFactory.sol
+│   │   └── PredictionMarket.sol
+│   ├── scripts/         # Deployment and utility scripts
+│   │   ├── deploy_all.ts
+│   │   └── export_abis.ts
+│   ├── test/            # Contract tests
+│   ├── artifacts/       # Compiled contracts
+│   ├── typechain-types/ # TypeScript types for contracts
+│   ├── hardhat.config.cjs
+│   ├── hardhat.config.ts
+│   └── package.json     # Contract dependencies
+│
+├── pitch-deck.html      # Interactive HTML pitch deck
+├── OracleBet Hub - Pitch Deck.pdf  # PDF version of pitch deck
+├── docker-compose.yml   # Docker Compose configuration
+├── Dockerfile           # Root Dockerfile
+├── Makefile             # Build and deployment commands
+├── package.json         # Root package.json
+└── README.md            # This file
 ```
 
 ## 🔗 Links
 
 - **Live Demo**: [OracleBet](https://oraclebet-1.onrender.com/)
+- **Pitch Deck**: [HTML](./pitch-deck.html) | [PDF](./OracleBet%20Hub%20-%20Pitch%20Deck.pdf)
 - **Network**: Mantle Sepolia Testnet
 - **Explorer**: [Mantle Sepolia Explorer](https://explorer.sepolia.mantle.xyz)
 - **Repository**: [GitHub](https://github.com/Usernyagah/OracleBet)

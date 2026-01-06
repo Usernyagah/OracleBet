@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OracleBet Hub - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        section {
+            padding: 50px 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #764ba2;
+        }
+
+        .one-pager {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .team-member h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .team-member .role {
+            color: #764ba2;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .team-member .bio {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .team-member .contact {
+            margin-top: 15px;
+        }
+
+        .team-member .contact a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .team-member .contact a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .compliance {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .compliance h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .compliance p {
+            color: #856404;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .compliance .declaration {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .roadmap-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .roadmap-item .phase {
+            font-weight: 700;
+            color: #667eea;
+            min-width: 100px;
+            margin-right: 20px;
+        }
+
+        .roadmap-item .content {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            .one-pager,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OracleBet Hub</h1>
+            <p>Decentralized Prediction Market Platform</p>
+        </header>
+
+        <!-- One-Pager Pitch -->
+        <section id="one-pager">
+            <div class="one-pager">
+                <div class="card">
+                    <h3>Problem</h3>
+                    <p>
+                        Traditional prediction markets are centralized, lack transparency, and often have high barriers to entry. 
+                        Users face issues with trust, liquidity, and limited market options. The current ecosystem lacks a 
+                        decentralized, user-friendly platform that allows anyone to create and participate in prediction markets 
+                        with full transparency and security.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Solution</h3>
+                    <p>
+                        OracleBet Hub is a decentralized prediction market platform built on blockchain technology. 
+                        We enable users to create custom prediction markets, trade shares, and settle outcomes transparently 
+                        through smart contracts. Our platform provides:
+                    </p>
+                    <ul>
+                        <li>Decentralized market creation and management</li>
+                        <li>Transparent, on-chain settlement</li>
+                        <li>Low barrier to entry for market creators</li>
+                        <li>Secure, trustless trading environment</li>
+                        <li>User-friendly interface for seamless experience</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Business Model</h3>
+                    <p>
+                        Our revenue model is designed around platform sustainability and growth:
+                    </p>
+                    <ul>
+                        <li><strong>Market Creation Fees:</strong> Small fee for creating new prediction markets</li>
+                        <li><strong>Trading Fees:</strong> Percentage-based fee on all trades executed on the platform</li>
+                        <li><strong>Premium Features:</strong> Advanced analytics and market management tools</li>
+                        <li><strong>Partnership Revenue:</strong> Strategic partnerships with data providers and oracles</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        The platform operates on a sustainable fee structure that incentivizes market creation while 
+                        maintaining low costs for traders.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 30px;">
+                <h3>Roadmap</h3>
+                <div class="roadmap-item">
+                    <div class="phase">Phase 1</div>
+                    <div class="content">
+                        <strong>Foundation (Q1 2024)</strong>
+                        <ul>
+                            <li>Core smart contract development and deployment</li>
+                            <li>Basic market creation and trading functionality</li>
+                            <li>Initial frontend development</li>
+                            <li>Security audits and testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="phase">Phase 2</div>
+                    <div class="content">
+                        <strong>Launch & Growth (Q2 2024)</strong>
+                        <ul>
+                            <li>Public beta launch</li>
+                            <li>User onboarding and community building</li>
+                            <li>Enhanced UI/UX improvements</li>
+                            <li>Integration with price oracles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="phase">Phase 3</div>
+                    <div class="content">
+                        <strong>Expansion (Q3-Q4 2024)</strong>
+                        <ul>
+                            <li>Mobile application development</li>
+                            <li>Advanced analytics and reporting tools</li>
+                            <li>Multi-chain support</li>
+                            <li>API for third-party integrations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="phase">Phase 4</div>
+                    <div class="content">
+                        <strong>Scale & Optimize (2025+)</strong>
+                        <ul>
+                            <li>Governance token launch</li>
+                            <li>DAO structure implementation</li>
+                            <li>Global market expansion</li>
+                            <li>Enterprise partnerships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Bios -->
+        <section id="team">
+            <h2>Team Bios & Contact Info</h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Dennis Nyagah</h3>
+                    <div class="role">Fullstack Developer</div>
+                    <div class="bio">
+                        Dennis is a skilled fullstack developer with expertise in building decentralized 
+                        applications and blockchain solutions. He combines frontend and backend development 
+                        skills to create seamless, user-friendly web3 experiences.
+                    </div>
+                    <div class="contact">
+                        <a href="mailto:dennisnyagah16@gmail.com">dennisnyagah16@gmail.com</a><br>
+                        <a href="https://github.com/Usernyagah" target="_blank">GitHub: @Usernyagah</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance Declaration -->
+        <section id="compliance">
+            <h2>Compliance Declaration</h2>
+            
+            <div class="compliance">
+                <h3>Regulatory Disclosure</h3>
+                <p>
+                    OracleBet Hub is committed to operating in compliance with applicable laws and regulations. 
+                    This section provides important disclosures regarding the regulatory status of our platform 
+                    and the assets involved.
+                </p>
+
+                <div class="declaration">
+                    <h3 style="color: #856404; margin-top: 0;">Regulated Assets Disclosure</h3>
+                    <p style="color: #333;">
+                        <strong>OracleBet Hub involves the use of digital assets and blockchain technology.</strong>
+                    </p>
+                    <ul style="color: #333;">
+                        <li>
+                            <strong>Cryptocurrency Trading:</strong> The platform facilitates trading of prediction market 
+                            shares using cryptocurrency (ETH and other ERC-20 tokens). Users must be aware that 
+                            cryptocurrency trading involves significant risk.
+                        </li>
+                        <li>
+                            <strong>Regulatory Status:</strong> Prediction markets may be subject to gambling, 
+                            securities, or financial services regulations depending on jurisdiction. We are actively 
+                            monitoring regulatory developments and will comply with applicable laws.
+                        </li>
+                        <li>
+                            <strong>Geographic Restrictions:</strong> The platform may not be available in certain 
+                            jurisdictions where prediction markets or cryptocurrency trading are restricted or prohibited.
+                        </li>
+                        <li>
+                            <strong>No Investment Advice:</strong> OracleBet Hub does not provide investment, legal, 
+                            or financial advice. All trading decisions are made by users at their own risk.
+                        </li>
+                        <li>
+                            <strong>KYC/AML:</strong> We are implementing Know Your Customer (KYC) and Anti-Money 
+                            Laundering (AML) procedures where required by applicable regulations.
+                        </li>
+                        <li>
+                            <strong>Tax Obligations:</strong> Users are responsible for understanding and complying 
+                            with their local tax obligations related to cryptocurrency trading and prediction market 
+                            participation.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="declaration" style="margin-top: 20px;">
+                    <h3 style="color: #856404; margin-top: 0;">Risk Disclosure</h3>
+                    <p style="color: #333;">
+                        Participation in prediction markets involves substantial risk of loss. Users should:
+                    </p>
+                    <ul style="color: #333;">
+                        <li>Only invest funds they can afford to lose</li>
+                        <li>Understand the mechanics of prediction markets before participating</li>
+                        <li>Be aware of smart contract risks and potential vulnerabilities</li>
+                        <li>Consult with legal and financial advisors if uncertain about regulatory implications</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
