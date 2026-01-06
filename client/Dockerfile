@@ -13,14 +13,14 @@ RUN npm ci --only=production=false --prefer-offline --no-audit
 # Copy source code
 COPY . .
 
-# Build arguments for environment variables
-ARG VITE_FACTORY_ADDRESS
-ARG VITE_MARKET_ADDRESSES
+# Build arguments for environment variables (with defaults)
+ARG VITE_FACTORY_ADDRESS=0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703
+ARG VITE_MARKET_ADDRESSES=0x0667C18576CeDa4f0a54d3614684b1271D357C9b,0xA24F78E64af7fb8b580862C23Cb44728F4a6468A,0x819d4A350A6eD4098fD57C51a3281967F57f10d0
 ARG VITE_CHAIN_ID=5003
 ARG VITE_RPC_URL=https://rpc.sepolia.mantle.xyz
 ARG VITE_EXPLORER_URL=https://explorer.sepolia.mantle.xyz
 
-# Set environment variables for build
+# Set environment variables for build (Vite reads these at build time)
 ENV VITE_FACTORY_ADDRESS=${VITE_FACTORY_ADDRESS}
 ENV VITE_MARKET_ADDRESSES=${VITE_MARKET_ADDRESSES}
 ENV VITE_CHAIN_ID=${VITE_CHAIN_ID}
@@ -28,10 +28,6 @@ ENV VITE_RPC_URL=${VITE_RPC_URL}
 ENV VITE_EXPLORER_URL=${VITE_EXPLORER_URL}
 
 # Build the application
-# Validate that build args are provided
-RUN if [ -z "$VITE_FACTORY_ADDRESS" ]; then \
-      echo "Error: VITE_FACTORY_ADDRESS build arg is required" && exit 1; \
-    fi
 RUN npm run build
 
 # Verify build output exists

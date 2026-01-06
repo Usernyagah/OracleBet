@@ -18,22 +18,35 @@ function isValidAddress(address: string): boolean {
 }
 
 /**
+ * Default contract addresses (fallback for production)
+ */
+const DEFAULT_FACTORY_ADDRESS = '0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703';
+const DEFAULT_MARKET_ADDRESSES = '0x0667C18576CeDa4f0a54d3614684b1271D357C9b,0xA24F78E64af7fb8b580862C23Cb44728F4a6468A,0x819d4A350A6eD4098fD57C51a3281967F57f10d0';
+
+/**
  * Validates environment variables and returns configuration
  */
 export function getEnvConfig(): EnvConfig {
-  const factoryAddress = import.meta.env.VITE_FACTORY_ADDRESS;
-  const marketAddresses = import.meta.env.VITE_MARKET_ADDRESSES;
+  // Use environment variables or fall back to defaults (deployed addresses)
+  const factoryAddress = import.meta.env.VITE_FACTORY_ADDRESS || DEFAULT_FACTORY_ADDRESS;
+  const marketAddresses = import.meta.env.VITE_MARKET_ADDRESSES || DEFAULT_MARKET_ADDRESSES;
   const chainId = import.meta.env.VITE_CHAIN_ID || '5003';
   const rpcUrl = import.meta.env.VITE_RPC_URL || 'https://rpc.sepolia.mantle.xyz';
   const explorerUrl = import.meta.env.VITE_EXPLORER_URL || 'https://explorer.sepolia.mantle.xyz';
 
-  // Validate factory address
-  if (!factoryAddress) {
-    throw new Error('VITE_FACTORY_ADDRESS is required but not set');
-  }
-
+  // Validate factory address format
   if (!isValidAddress(factoryAddress)) {
-    throw new Error(`Invalid VITE_FACTORY_ADDRESS format: ${factoryAddress}`);
+    console.error(`Invalid VITE_FACTORY_ADDRESS format: ${factoryAddress}`);
+    // Use default if invalid
+    const validFactory = DEFAULT_FACTORY_ADDRESS;
+    console.warn(`Using default factory address: ${validFactory}`);
+    return {
+      VITE_FACTORY_ADDRESS: validFactory,
+      VITE_MARKET_ADDRESSES: marketAddresses || DEFAULT_MARKET_ADDRESSES,
+      VITE_CHAIN_ID: chainId,
+      VITE_RPC_URL: rpcUrl,
+      VITE_EXPLORER_URL: explorerUrl,
+    };
   }
 
   // Validate market addresses
