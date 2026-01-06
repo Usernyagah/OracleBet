@@ -37,3 +37,4 @@ yarn-error.log*
 client/playwright-report/
 client/test-results/
 client/playwright/.cache/
+PRODUCTION_CHECKLIST.md
