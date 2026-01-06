@@ -118,11 +118,11 @@ jobs:
         working-directory: ./client
         run: npm run build
         env:
-          VITE_FACTORY_ADDRESS: 0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703
-          VITE_MARKET_ADDRESSES: 0x0667C18576CeDa4f0a54d3614684b1271D357C9b,0xA24F78E64af7fb8b580862C23Cb44728F4a6468A,0x819d4A350A6eD4098fD57C51a3281967F57f10d0
-          VITE_CHAIN_ID: 5003
-          VITE_RPC_URL: https://rpc.sepolia.mantle.xyz
-          VITE_EXPLORER_URL: https://explorer.sepolia.mantle.xyz
+          VITE_FACTORY_ADDRESS: "0xBF559Fc75fa3c2070D65Cd9ccE9e81Ce926db703"
+          VITE_MARKET_ADDRESSES: "0x0667C18576CeDa4f0a54d3614684b1271D357C9b,0xA24F78E64af7fb8b580862C23Cb44728F4a6468A,0x819d4A350A6eD4098fD57C51a3281967F57f10d0"
+          VITE_CHAIN_ID: "5003"
+          VITE_RPC_URL: "https://rpc.sepolia.mantle.xyz"
+          VITE_EXPLORER_URL: "https://explorer.sepolia.mantle.xyz"
       
       - name: Check build output
         run: |
