@@ -99,7 +99,7 @@ describe("Market", function () {
         .to.emit(market, "SharesBought");
 
       const yesTokenAddress = await market.yesToken();
-      const YesToken = await ethers.getContractAt("ShareToken", yesTokenAddress);
+      const YesToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", yesTokenAddress);
       expect(await YesToken.balanceOf(user2.address)).to.be.gt(0);
     });
 
@@ -110,7 +110,7 @@ describe("Market", function () {
         .to.emit(market, "SharesBought");
 
       const noTokenAddress = await market.noToken();
-      const NoToken = await ethers.getContractAt("ShareToken", noTokenAddress);
+      const NoToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", noTokenAddress);
       expect(await NoToken.balanceOf(user2.address)).to.be.gt(0);
     });
   });
@@ -181,7 +181,7 @@ describe("Market", function () {
 
     it("Should allow redeeming Yes shares after Yes resolution", async function () {
       const yesTokenAddress = await market.yesToken();
-      const YesToken = await ethers.getContractAt("ShareToken", yesTokenAddress);
+      const YesToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", yesTokenAddress);
       const yesBalance = await YesToken.balanceOf(user2.address);
       expect(yesBalance).to.be.gt(0);
 
@@ -198,7 +198,7 @@ describe("Market", function () {
 
     it("Should prevent redeeming No shares after Yes resolution", async function () {
       const noTokenAddress = await market.noToken();
-      const NoToken = await ethers.getContractAt("ShareToken", noTokenAddress);
+      const NoToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", noTokenAddress);
       
       // User1 has No shares from liquidity
       const noBalance = await NoToken.balanceOf(user1.address);
@@ -229,7 +229,7 @@ describe("Market", function () {
 
     it("Should allow redeeming No shares after No resolution", async function () {
       const noTokenAddress = await market.noToken();
-      const NoToken = await ethers.getContractAt("ShareToken", noTokenAddress);
+      const NoToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", noTokenAddress);
       const noBalance = await NoToken.balanceOf(user2.address);
       expect(noBalance).to.be.gt(0);
 
@@ -246,7 +246,7 @@ describe("Market", function () {
 
     it("Should prevent redeeming Yes shares after No resolution", async function () {
       const yesTokenAddress = await market.yesToken();
-      const YesToken = await ethers.getContractAt("ShareToken", yesTokenAddress);
+      const YesToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", yesTokenAddress);
       
       // User1 has Yes shares from liquidity
       const yesBalance = await YesToken.balanceOf(user1.address);
