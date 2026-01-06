@@ -81,7 +81,7 @@ describe("OracleBet Prediction Market - Full E2E Flow", function () {
       expect(balanceBefore - balanceAfter).to.be.gte(mntAmount);
 
       // Check Yes shares
-      const yesToken = await ethers.getContractAt("ShareToken", await market.yesShares());
+      const yesToken = await ethers.getContractAt("contracts/PredictionMarket.sol:ShareToken", await market.yesShares());
       const yesBalance = await yesToken.balanceOf(user1.address);
       expect(yesBalance).to.be.gt(0);
 
@@ -110,7 +110,7 @@ describe("OracleBet Prediction Market - Full E2E Flow", function () {
       expect(balanceBefore - balanceAfter).to.be.gte(mntAmount);
 
       // Check No shares
-      const noToken = await ethers.getContractAt("ShareToken", await market.noShares());
+      const noToken = await ethers.getContractAt("contracts/PredictionMarket.sol:ShareToken", await market.noShares());
       const noBalance = await noToken.balanceOf(user2.address);
       expect(noBalance).to.be.gt(0);
     });
@@ -246,8 +246,8 @@ describe("OracleBet Prediction Market - Full E2E Flow", function () {
       // Add liquidity first
       await market.connect(user1).addLiquidity({ value: ethers.parseEther("1.0") });
       
-      const yesToken = await ethers.getContractAt("ShareToken", await market.yesShares());
-      const noToken = await ethers.getContractAt("ShareToken", await market.noShares());
+      const yesToken = await ethers.getContractAt("contracts/PredictionMarket.sol:ShareToken", await market.yesShares());
+      const noToken = await ethers.getContractAt("contracts/PredictionMarket.sol:ShareToken", await market.noShares());
       
       const yesBalance = await yesToken.balanceOf(user1.address);
       const noBalance = await noToken.balanceOf(user1.address);

@@ -39,8 +39,8 @@ describe("Market", function () {
       expect(yesTokenAddress).to.not.equal(ethers.ZeroAddress);
       expect(noTokenAddress).to.not.equal(ethers.ZeroAddress);
 
-      const YesToken = await ethers.getContractAt("ShareToken", yesTokenAddress);
-      const NoToken = await ethers.getContractAt("ShareToken", noTokenAddress);
+      const YesToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", yesTokenAddress);
+      const NoToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", noTokenAddress);
 
       expect(await YesToken.name()).to.equal("Yes Share");
       expect(await YesToken.symbol()).to.equal("YES");
@@ -75,8 +75,8 @@ describe("Market", function () {
 
       const yesTokenAddress = await market.yesToken();
       const noTokenAddress = await market.noToken();
-      const YesToken = await ethers.getContractAt("ShareToken", yesTokenAddress);
-      const NoToken = await ethers.getContractAt("ShareToken", noTokenAddress);
+      const YesToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", yesTokenAddress);
+      const NoToken = await ethers.getContractAt("contracts/Market.sol:ShareToken", noTokenAddress);
 
       expect(await YesToken.balanceOf(user1.address)).to.equal(yesAmount);
       expect(await NoToken.balanceOf(user1.address)).to.equal(noAmount);
