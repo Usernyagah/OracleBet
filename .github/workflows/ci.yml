@@ -17,8 +17,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
       
       - name: Install dependencies
         working-directory: ./client
@@ -38,8 +36,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
       
       - name: Install dependencies
         working-directory: ./contracts
@@ -63,8 +59,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
       
       - name: Install dependencies
         working-directory: ./client
@@ -86,7 +80,8 @@ jobs:
       
       - name: Run E2E tests
         working-directory: ./client
-        run: npm run test:e2e -- --project=chromium || true
+        run: npm run test:e2e -- --project=chromium
+        continue-on-error: true
       
       - name: Upload test results
         if: always()
@@ -109,8 +104,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
       
       - name: Install dependencies
         working-directory: ./client
